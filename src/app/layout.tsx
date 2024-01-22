@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: 'Machine statement',
   description: 'Machine operater system',
   openGraph: {
-    title: "",
-    url: "",
+    title: "Machine statement",
+    url: "machine",
     type: "website",
     description:
       "Machine operater system",
