@@ -1,5 +1,7 @@
-import Link from 'next/link';
 import React from 'react'
+
+import Link from 'next/link';
+
 import { IoStatsChartSharp } from "react-icons/io5";
 import { MdHistory } from "react-icons/md";
 import { TbSettings } from "react-icons/tb";
