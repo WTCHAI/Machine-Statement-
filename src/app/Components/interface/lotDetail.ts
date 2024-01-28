@@ -1,7 +1,8 @@
 export interface lotDetails {
-  Machine_ID: string;
-  Direction: string;
-  Timestamp: string;
+  LotId : any, 
+  Machine_ID: any;
+  Direction: any;
+  Timestamp: any;
   Substrate: any;
   TTL: any;
   badmark: any;

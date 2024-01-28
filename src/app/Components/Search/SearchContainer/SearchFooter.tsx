@@ -24,7 +24,7 @@ export default function SearchFooter({onPageChangeHandler,pageStatus}: Props) {
     <section className='flex flex-row w-full h-full items-center bg-slate-200 border-t-2 border-slate-300' >
         <span className='flex flex-row w-full justify-start pl-[5vw] text-lg tracking-tight leading-tight font-medium'>
             <h1 className='text-slate-600'>
-                Page {pageStatus.currentPage} of {pageStatus.maxPage}
+                Page {pageStatus.currentPage} of {pageStatus.maxPage === 0 ? 1 : pageStatus.maxPage  }
             </h1>
           
         </span>
