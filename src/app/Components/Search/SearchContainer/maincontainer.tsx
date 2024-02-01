@@ -20,121 +20,61 @@ type DataType = lotDetails[] | lotSubDetails[]
 
 export default function Maincontainer({}: Props) {
   const router = useRouter()
-  // check url
   const pathName = useParams()
 
-    const [data,onSetData] = useState<DataType>([]) 
-    const [calendar,onSetcalendar] = useState<any>(null) 
-    const [isLoading , setLoading] = useState<boolean>(true) 
+  const [data,onSetData] = useState<DataType>([])
+  const [pageStatus , onsetCurrentPage] = useState({
+    startIndex : 0 ,
+    currentPage : 1 , 
+    totalPage : 1
+  })
+
+  const [calendar,onSetcalendar] = useState<any>(null) 
+
+  const [isLoading , setLoading] = useState<boolean>(true) 
+
+  const onPageChangeHandler = async (type: string) => {
+    setLoading(true);
+    let newStartIndex = pageStatus.startIndex
+
+    if (type === "Increase") {
+      if (pageStatus.currentPage < pageStatus.totalPage ) {
+
+        onsetCurrentPage({
+            ...pageStatus , 
+            currentPage : pageStatus.currentPage+1 ,
+            startIndex : pageStatus.currentPage*10
+        })
+        newStartIndex = pageStatus.currentPage*10
+      }
+
+      // }
+    } else if (type === "Decrease") {
+      if (pageStatus.currentPage > 1 && pageStatus.currentPage !== 1 ) {
+        onsetCurrentPage({
+          ...pageStatus , 
+          currentPage : pageStatus.currentPage-1,
+          startIndex : (pageStatus.currentPage-2)*10
+        })
+        newStartIndex = (pageStatus.currentPage-2)*10
+      }
+    }
+    const currentLotStorage = sessionStorage.getItem("currentLots");
+
+    if (!pathName.id && currentLotStorage && pageStatus.currentPage <= pageStatus.totalPage) {
+      const currentLots = JSON.parse(currentLotStorage);
+
+      const tempData: DataType = pageStatus.currentPage === Math.ceil(currentLots.length / 10)
+        ? currentLots.slice(newStartIndex, currentLots.length - 1)
+        : currentLots.slice(newStartIndex,newStartIndex + 10)
+      onSetData(tempData)
+      }
+      setLoading(false);
+  }
   
-    //page check status handler ---------------------
-    const [currentPage , setCurrentPage] = useState(1) 
-    const totalPage = Math.ceil(data.length / 9) 
-    const startIndex = (currentPage-1) * 9 
-    const currentData : DataType = startIndex == totalPage
-    ? data.slice(startIndex,data.length-1)
-    : data.slice(startIndex , startIndex+9) 
-    const pageStatus = {
-        currentPage: currentPage,
-        maxPage: totalPage
-    }
-
-    const onPageChangeHandler : any = (type : string)=>{
-        if (type === "Increase"){
-            if (currentPage < totalPage){
-                setCurrentPage(prev=>prev+1)
-            }
-        }else if (type === "Decrease"){
-            if (currentPage > 0 && currentPage !== 1  ){
-                setCurrentPage(prev=>prev-1)
-            }
-        }
-    }
-    // ----------------------------------
-
-    //fetcing process for search handler with lot 
   const onFetchingLots = async( targetKey : any )=>{
     setLoading(true)
-    // const dataFromServer: lotDetails[] = [
-    //     {
-    //       Machine_ID: "1",
-    //       Direction: "Up",
-    //       Timestamp: "2024-01-22T12:00:00",
-    //       Substrate: "Substrate Name 1",
-    //       TTL: "Some TTL",
-    //       badmark: "Bad Mark",
-    //       ASSY_input: "Some ASSY Input",
-    //       NG: 5,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "2",
-    //       Direction: "Down",
-    //       Timestamp: "2024-01-22T13:30:00",
-    //       Substrate: null,
-    //       TTL: null,
-    //       badmark: "Another Bad Mark",
-    //       ASSY_input: "Another ASSY Input",
-    //       NG: null,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "3",
-    //       Direction: "Up",
-    //       Timestamp: "2024-01-22T14:45:00",
-    //       Substrate: "Yet Another Substrate",
-    //       TTL: null,
-    //       badmark: "Yet Another Bad Mark",
-    //       ASSY_input: "Yet Another ASSY Input",
-    //       NG: 2,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "4",
-    //       Direction: "Down",
-    //       Timestamp: "2024-01-22T16:15:00",
-    //       Substrate: "One More Substrate",
-    //       TTL: "Some TTL",
-    //       badmark: null,
-    //       ASSY_input: "One More ASSY Input",
-    //       NG: 0,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "5",
-    //       Direction: "Up",
-    //       Timestamp: "2024-01-22T17:30:00",
-    //       Substrate: null,
-    //       TTL: "Another TTL",
-    //       badmark: "Another Bad Mark",
-    //       ASSY_input: "Another ASSY Input",
-    //       NG: null,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "6",
-    //       Direction: "Up",
-    //       Timestamp: "2024-01-22T17:30:00",
-    //       Substrate: null,
-    //       TTL: "Another TTL",
-    //       badmark: "Another Bad Mark",
-    //       ASSY_input: "Another ASSY Input",
-    //       NG: null,
-    //       Good: "Good",
-    //     },
-    //     {
-    //       Machine_ID: "7",
-    //       Direction: "Up",
-    //       Timestamp: "2024-01-22T17:30:00",
-    //       Substrate: null,
-    //       TTL: "Another TTL",
-    //       badmark: "Another Bad Mark",
-    //       ASSY_input: "Another ASSY Input",
-    //       NG: null,
-    //       Good: "Good",
-    //     },
 
-    // ];
     const dataFromServer: lotSubDetails[] = [
       {
         LotId : "1",
@@ -176,70 +116,238 @@ export default function Maincontainer({}: Props) {
       },      {
         LotId: "11",
         Timestamp: "2024-01-22T17:30:00",
-      },      {
+      },      
+      {
         LotId: "12",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "13",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "14",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "15",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "17",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "18",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "19",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "20",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "21",
+        Timestamp: "2024-01-22T17:30:00",
+      },      
+      {
+        LotId: "22",
         Timestamp: "2024-01-22T17:30:00",
       }
     ];
-    // get data from server and set state of data get fetch submit from search and sent data to main container
-    // const dataFromServer : lotDetails[] = []
-    if (calendar){
-      console.log("on Fetcing executed : ",targetKey,calendar)
-    }
-    else {
-      console.log("on Fetcing executed : ",targetKey)
-    }
-      //after getting it store it to sesionstorage 
+    //after getting it store it to sesionstorage 
     sessionStorage.setItem('currentLots',JSON.stringify(dataFromServer))
+
     setTimeout(() => {
-        // After the delay, set the data and setLoading to false
-      onSetData(dataFromServer);
-      setLoading(false);
-    }, 3000);
-    router.push('/search')
-  }  
+      // After the delay, set the data and setLoading to false
+      const tempData: DataType =
+      pageStatus.currentPage === Math.ceil(dataFromServer.length / 10)
+        ? dataFromServer.slice(pageStatus.startIndex, dataFromServer.length - 1)
+        : dataFromServer.slice(pageStatus.startIndex,pageStatus.startIndex + 10)
+      onSetData(tempData)
+      setLoading(false)
+    }, 2000)
+    onsetCurrentPage({
+      startIndex : 0 ,
+      currentPage : 1 , 
+      totalPage : Math.ceil(dataFromServer.length / 10)
+    })
+    router.replace('/search')
+  }
   // after get lot target fetch list of lot details
   const onFetchingLotDetails = async(targetKey : any)=>{
-    //
     setLoading(true)
+    const dataFromServer: lotDetails[] = [
+      {
+        LotId: "1",
+        stationName: "PKB",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "2",
+        stationName: "qwe",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "3",
+        stationName: "rty",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "4",
+        stationName: "tyu",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      }      ,{
+        LotId: "5",
+        stationName: "PKB",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "6",
+        stationName: "asdf",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "7",
+        stationName: "asfh",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "8",
+        stationName: "asdf",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },          {
+        LotId: "9",
+        stationName: "ujkl;",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },         {
+        LotId: "10",
+        stationName: "lqasdf",
+        Direction: "Up",
+        Timestamp: "2024-01-22T12:00:00",
+        Substrate: 15,
+        TTL: 50,
+        badmark: 133,
+        ASSY_input: 12,
+        NG: 5,
+        Good: 52,
+      },
+    ]    
+    setTimeout(() => {
+      // onSetData(dataFromServer)
+      //save Data to local storage
+      sessionStorage.setItem('currentDetails',JSON.stringify(dataFromServer))
+      onSetData(dataFromServer)
+      setLoading(false)       
+    },1000)
+
   }
 
   //calendar filter 
-  const onFiterDate  = (targetDate:any)=>{
+  const onFiterDate = (targetDate:any)=>{
     onSetcalendar(targetDate)
   }
 
-  // get initial data
-  useEffect(()=>{
-    setLoading(true)
-    const currentStorage = sessionStorage.getItem('currentLots')
-    if (currentStorage){
-      setTimeout(() => {
-        const tempData = JSON.parse(currentStorage)
-        if (pathName.id){
-          //case if have pathname wanna know inside data 
-          const currentData = tempData.filter((e : lotDetails)=>e.LotId === pathName.id)
-          onSetData(currentData)           
-        }else{
-          //wanna know just lot id and date details
-          const currentData = tempData.map((e : lotDetails)=>{
-            return e
-          })
-          onSetData(currentData)          
-        }
-      setLoading(false)       
-      },1000)
-    }else{
-      setLoading(false)
+  const onUpdatedDataFromStorage = ()=>{
+    const currentLotStorage = sessionStorage.getItem("currentLots");
+    const currentLotDetails = sessionStorage.getItem("currentDetails");
+
+    if (!pathName.id && currentLotStorage) {
+      const currentLots = JSON.parse(currentLotStorage);
+
+      onsetCurrentPage({
+        ...pageStatus,
+        totalPage: Math.ceil(currentLots.length / 10),
+      });
+
+      const tempData: DataType =
+        pageStatus.currentPage === Math.ceil(currentLots.length / 10)
+          ? currentLots.slice(pageStatus.startIndex, currentLots.length - 1)
+          : currentLots.slice(pageStatus.startIndex,pageStatus.startIndex + 10)
+      onSetData(tempData);
+    } else if (pathName.id && currentLotDetails) {
+      onSetData(JSON.parse(currentLotDetails));
     }
-  },[])    
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    // Fetch initial data and handle sessionStorage updates
+    onUpdatedDataFromStorage();
+    
+  }, []);
+
   return (
     <>
       <SearchHeader onFetcing={onFetchingLots} onFilterDate={onFiterDate}/>
-        <main className='w-full'>
-          <HeadDetails/>
-          <ul className='flex flex-col h-[80vh] w-full bg-slate-100 '>
-              <SearchResultlist data={currentData} isLoading={isLoading} onFetchingLotDetails={onFetchingLotDetails}/>
+        <main className='w-full bg-slate-100 px-[1vw]' >
+          <HeadDetails data={data[0]}/>
+          <ul className='flex flex-col h-[82vh] w-full gap-y-[0.7vh] mt-[0.5vh]'>
+              <SearchResultlist 
+                data={data}
+                isLoading={isLoading}
+                onFetchingLotDetails={onFetchingLotDetails}
+              />
           </ul> 
         </main>
       <SearchFooter onPageChangeHandler={onPageChangeHandler} pageStatus={pageStatus}/>  

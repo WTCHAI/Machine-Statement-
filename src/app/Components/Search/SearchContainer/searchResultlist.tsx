@@ -21,29 +21,36 @@ export default function SearchResultlist({data , isLoading , onFetchingLotDetail
     //check u path in url 
     const pathName = useParams()
 
-
-
     return (
         <>
-            <div>
-                {!isLoading && data.length !== 0 && data.map(e=>{
+            {!isLoading && data.length !== 0 && data.map((e : lotDetails | lotSubDetails)=>{
                     return (
-                        <Link
-                            href="search/[targetId]" as={`/search/${e.LotId}`}
-                            key={e.LotId}
-                            onClick={()=>{
-                                onFetchingLotDetails(e.LotId)
-                            }}
-                        >
-                            <li className='h-[9vh] min-h-[9vh] w-full ' key={e.LotId}>
-                                <Lotdetails lotDetail={e} key={e.LotId}/> 
-                            </li>                        
-                        </Link>
+                        <>
+                            {!pathName.id &&
+                            <Link
+                                href="search/[targetId]" as={`/search/${e.LotId}`}
+                                // href=""
+                                key={e.LotId}
+                                onClick={()=>{
+                                    onFetchingLotDetails(e.LotId)
+                                }}
+                            >
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-sky-50  ' key={e.LotId}>
+                                    <Lotdetails lotDetail={e}/> 
+                                </li>                        
+                            </Link>
+                            }
+                            {pathName.id && 
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-50 ' key={e.LotId}>
+                                    <Lotdetails lotDetail={e} /> 
+                                </li>  
+                            }                   
+                        </>
+
                     )
                 })}
                 {!isLoading && data.length === 0 && <EmptyData/>}
                 {isLoading && <p>loading ...... </p>}
-            </div>
         </>
 
   )

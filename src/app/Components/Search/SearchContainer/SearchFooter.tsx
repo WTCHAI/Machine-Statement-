@@ -7,8 +7,9 @@ import { GrNext } from "react-icons/gr";
 type Props = {
     onPageChangeHandler: (type: string) => void;
     pageStatus: {
-      currentPage: number,
-      maxPage: number
+        startIndex : number ,
+        currentPage : number , 
+        totalPage : number , 
     };
 }
 
@@ -21,12 +22,12 @@ export default function SearchFooter({onPageChangeHandler,pageStatus}: Props) {
     }
 
   return (
-    <section className='flex flex-row w-full h-full items-center bg-slate-200 border-t-2 border-slate-300' >
+    <section className='flex flex-row w-full h-full items-center bg-transparent' >
         <span className='flex flex-row w-full justify-start pl-[5vw] text-lg tracking-tight leading-tight font-medium'>
             <h1 className='text-slate-600'>
-                Page {pageStatus.currentPage} of {pageStatus.maxPage === 0 ? 1 : pageStatus.maxPage  }
+                Page {pageStatus.currentPage} of {pageStatus.totalPage === 0 ? 1 : pageStatus.totalPage  }
             </h1>
-          
+            
         </span>
         <span className='flex flex-row w-full justify-end pr-[5vw] gap-x-[3vw]'>
             <button
@@ -35,16 +36,20 @@ export default function SearchFooter({onPageChangeHandler,pageStatus}: Props) {
                     pageStatus.currentPage === 1
                     ? 'bg-slate-500'
                     : 'bg-slate-600 active:scale-105 hover:bg-opacity-80'
-                  } px-[2vw] py-[1vh] rounded-lg  text-white transition-all`}                >
+                  } px-[2vw] py-[1vh] rounded-lg  text-white transition-all`} 
+                                 >
                 <GrPrevious/>
             </button>
             <button
                 onClick={onIncrement}
                 className={`${
-                    pageStatus.currentPage === pageStatus.maxPage
+                    pageStatus.currentPage === pageStatus.totalPage
                       ? 'bg-slate-500'
                       : 'bg-slate-600 active:scale-105 hover:bg-opacity-80'
-                  } px-[2vw] py-[1vh] rounded-lg text-white`}                >
+                  } px-[2vw] py-[1vh] rounded-lg text-white`}                
+                disabled={pageStatus.currentPage===pageStatus.totalPage}
+            >
+                
                 <GrNext/>
             </button>
         </span>

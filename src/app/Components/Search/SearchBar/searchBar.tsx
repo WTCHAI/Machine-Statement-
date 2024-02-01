@@ -17,15 +17,15 @@ export default function SearchBar({onFetching}: Props) {
   }
 
   return (
-    <div className='text-slate-800 w-[40vw]'>
+    <div className='w-[40vw] '>
       <form
-        className='flex flex-row w-full bg-white bg-opacity-90 items-center justify-start px-[2vw]  outline-slate-100 rounded-2xl shadow-sm outline-1'
+        className='flex flex-row w-full bg-gray-200 bg-opacity-90 items-center justify-start px-[2vw]  outline-slate-100 rounded-2xl shadow-sm outline-1'
         onSubmit={onSubmitHandler}
       >
         <input
           type='text'
           placeholder='Search...'
-          className='outline-0 bg-transparent text-lg w-full cursor-pointer py-[0.5vh]'
+          className='outline-0 bg-transparent text-lg w-full cursor-pointer py-[0.5vh] text-slate-800'
           value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value)

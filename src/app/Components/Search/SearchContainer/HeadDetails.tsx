@@ -1,14 +1,86 @@
-import React from 'react'
+import React from 'react';
+import { lotDetails } from '../../interface/lotDetail';
+import { lotSubDetails } from '../../interface/lotSubDetails';
+import { useParams } from 'next/navigation';
 
-type Props = {}
+type DataType = lotDetails | lotSubDetails;
 
-export default function HeadDetails({}: Props) {
+type Props = {
+  data: DataType;
+};
+
+export default function HeadDetails({ data }: Props) {
+
+  const pathName = useParams();
+
   return (
-    <>
-      <li className=' flex flex-row w-full h-[7vh] bg-slate-200 items-center border-b-2 border-slate-300 '>
-        <h3 className='flex w-full justify-center text-2xl font-normal tracking-tighter leading-tight text-slate-800'>Lot Id.</h3>
-        <h3 className='flex w-full justify-center text-2xl font-normal tracking-tighter leading-tight text-slate-800'>Time stamp</h3>
-      </li> 
-    </>
-  )
+    <ul className='flex flex-row h-[6vh]'>
+      {
+        pathName.id &&
+        <>
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+              <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
+                <p className='text-center w-full'>Station</p>
+              </div> 
+          </li>
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Direction</p>
+            </div> 
+          </li>
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Date</p>
+            </div> 
+          </li>  
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Substrate</p>
+            </div> 
+          </li>  
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>TTL</p>
+            </div> 
+          </li>   
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Bad</p>
+            </div> 
+          </li>
+          <li className={`flex flex-row w-full h-full] items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Assy input</p>
+            </div> 
+          </li>   
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>NG</p>
+            </div> 
+          </li>   
+          <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+            <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
+              <p className='text-center w-full'>Good</p>
+            </div> 
+          </li>   
+        </>
+      }
+      { !pathName.id && 
+      <>
+        <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+          <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
+            <p className=' w-full text-xl font-medium pl-[3vw]'>Lot Id</p>
+          </div> 
+        </li>
+        <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
+          <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
+            <p className='w-full text-xl font-medium pl-[3vw]'>Date</p>
+          </div> 
+        </li>    
+      </>
+
+      }
+
+    </ul>
+  );
 }

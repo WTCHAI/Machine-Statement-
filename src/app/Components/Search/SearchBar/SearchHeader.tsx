@@ -10,7 +10,7 @@ type Props = {
 
 export default function SearchHeader({onFetcing , onFilterDate }: Props) {
   return (
-    <header className='w-full flex flex-row justify-between items-center px-[2vw] bg-slate-600 py-[0.5vh]'>
+    <header className='w-full flex flex-row justify-between items-center px-[2vw] bg-gray-50 py-[0.5vh]'>
         <div>
             <SearchBar onFetching={onFetcing}/>
         </div>
