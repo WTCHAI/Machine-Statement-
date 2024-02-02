@@ -14,9 +14,8 @@ export default function Lotdetails({ lotDetail }: Props) {
 
   return (
     <div className='flex flex-row justify-center w-full h-full items-center'>
-      {keys.map((key: string) => {
-        let result: string = lotDetail[key];
-
+      {keys.map((key: any) => {
+        let result: any = lotDetail[key];
         switch (key) {
           case 'Timestamp':
             let [date,time] = result.split("T")
@@ -25,32 +24,41 @@ export default function Lotdetails({ lotDetail }: Props) {
             let timepart = time.split("-")
             result = `${datepart} : ${timepart}`
           break;
-          case 'ASSY_input':
-            break;
-          case 'TTL':
-            break;
           case 'badmark':
-            break;
-          case 'NG':
-            break;
+            return (
+              <p
+                key={key}
+                className={`flex w-full justify-center text-red-500 ${ keys.length === 2 ? 'text-xl' : 'text-md'}`}
+              >
+                {`${result}`}
+              </p>
+            );        
+          case 'Good' : 
+          return (
+            <p
+              key={key}
+              className={`flex w-full justify-center text-green-500 ${ keys.length === 2 ? 'text-xl' : 'text-md'}`}
+            >
+              {`${result}`}
+            </p>
+          );   
           default:
             break;
         }
+
         if ( key == 'LotId' && pathName.id){
           return ;
         }
         return (
           <p
             key={key}
-            className={`flex w-full justify-center text-slate-500
+            className={`flex w-full justify-center 
               ${ keys.length === 2 ? 'text-xl' : 'text-md'}
-              ${key == "badmark" ? 'text-red-500': ''} 
-              ${key == 'Good' ? 'text-green-500': ''}
-              `}
-          >
-            {`${result}`}
-          </p>
-        );
+            `}
+            >
+              {`${result}`}
+            </p>
+          );          
       })}
     </div>
   );

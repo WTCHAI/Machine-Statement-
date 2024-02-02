@@ -1,4 +1,6 @@
 
+import React from 'react'
+
 export default function LoginPage() {
   return (
     <main className="flex items-center justify-center md:h-screen">
@@ -9,7 +11,9 @@ export default function LoginPage() {
           </div>
         </div>
         <p>loginf form</p>
+        <p>test login form </p>
       </div>
     </main>
   );
 }
+

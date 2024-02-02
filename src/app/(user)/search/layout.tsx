@@ -1,4 +1,4 @@
-import SideBar from '@/app/Components/layouts/sideBar'
+import SideBar from '@/Components/layouts/sideBar'
 import React from 'react'
 
 type Props = {}
