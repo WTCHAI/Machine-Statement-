@@ -35,13 +35,13 @@ export default function SearchResultlist({data , isLoading , onFetchingLotDetail
                                     onFetchingLotDetails(e.LotId)
                                 }}
                             >
-                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-sky-50  ' key={e.LotId}>
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-200 hover:shadow-md ' key={e.LotId}>
                                     <Lotdetails lotDetail={e}/> 
                                 </li>                        
                             </Link>
                             }
                             {pathName.id && 
-                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-50 ' key={e.LotId}>
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-200 hover:shadow-md  ' key={e.LotId}>
                                     <Lotdetails lotDetail={e} /> 
                                 </li>  
                             }                   

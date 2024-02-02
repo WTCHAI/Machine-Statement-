@@ -42,7 +42,7 @@ export default function Lotdetails({ lotDetail }: Props) {
         return (
           <p
             key={key}
-            className={`flex w-full justify-center text-slate-800
+            className={`flex w-full justify-center text-slate-500
               ${ keys.length === 2 ? 'text-xl' : 'text-md'}
               ${key == "badmark" ? 'text-red-500': ''} 
               ${key == 'Good' ? 'text-green-500': ''}

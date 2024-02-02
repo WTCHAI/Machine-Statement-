@@ -20,47 +20,47 @@ export default function HeadDetails({ data }: Props) {
         <>
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
               <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
-                <p className='text-center w-full'>Station</p>
+                <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Station</p>
               </div> 
           </li>
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Direction</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Direction</p>
             </div> 
           </li>
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Date</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Date</p>
             </div> 
           </li>  
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Substrate</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Substrate</p>
             </div> 
           </li>  
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>TTL</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>TTL</p>
             </div> 
           </li>   
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Bad</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Bad</p>
             </div> 
           </li>
           <li className={`flex flex-row w-full h-full] items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Assy input</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Assy input</p>
             </div> 
           </li>   
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>NG</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>NG</p>
             </div> 
           </li>   
           <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
             <div className='flex w-full  tracking-tighter leading-tight text-slate-500 text-md font-medium '>
-              <p className='text-center w-full'>Good</p>
+              <p className='text-center pt-[2vh] w-full cursor-default hover:text-slate-400'>Good</p>
             </div> 
           </li>   
         </>
@@ -69,12 +69,12 @@ export default function HeadDetails({ data }: Props) {
       <>
         <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
           <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
-            <p className=' w-full text-xl font-medium pl-[3vw]'>Lot Id</p>
+            <p className=' w-full text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-slate-400'>Lot Id</p>
           </div> 
         </li>
         <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
           <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
-            <p className='w-full text-xl font-medium pl-[3vw]'>Date</p>
+            <p className=' w-full text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-slate-400'>Date</p>
           </div> 
         </li>    
       </>

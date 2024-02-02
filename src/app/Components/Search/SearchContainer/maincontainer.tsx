@@ -59,6 +59,7 @@ export default function Maincontainer({}: Props) {
         newStartIndex = (pageStatus.currentPage-2)*10
       }
     }
+
     const currentLotStorage = sessionStorage.getItem("currentLots");
 
     if (!pathName.id && currentLotStorage && pageStatus.currentPage <= pageStatus.totalPage) {
@@ -163,10 +164,7 @@ export default function Maincontainer({}: Props) {
 
     setTimeout(() => {
       // After the delay, set the data and setLoading to false
-      const tempData: DataType =
-      pageStatus.currentPage === Math.ceil(dataFromServer.length / 10)
-        ? dataFromServer.slice(pageStatus.startIndex, dataFromServer.length - 1)
-        : dataFromServer.slice(pageStatus.startIndex,pageStatus.startIndex + 10)
+      const tempData: DataType = dataFromServer.slice(0, 10)
       onSetData(tempData)
       setLoading(false)
     }, 2000)
