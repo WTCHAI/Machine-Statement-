@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React from 'react'
 import { useParams } from 'next/navigation';
 
-import { lotDetails } from '../../interface/lotDetail'
-import { lotSubDetails } from '../../interface/lotSubDetails';
+import { lotDetails } from '../../navMenu/interface/lotDetail'
+import { lotSubDetails } from '../../navMenu/interface/lotSubDetails';
 
 import Lotdetails from './lotdetails';
 import EmptyData from './EmptyData';
@@ -35,14 +35,14 @@ export default function SearchResultlist({data , isLoading , onFetchingLotDetail
                                     onFetchingLotDetails(e.LotId)
                                 }}
                             >
-                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-200 hover:shadow-md ' key={e.LotId}>
-                                    <Lotdetails lotDetail={e}/> 
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-gray-100 hover:bg-gray-200 hover:border-2 border-solid hover:border-gray-200' key={e.LotId}>
+                                    <Lotdetails lotDetail={e} isLoading={isLoading}/> 
                                 </li>                        
                             </Link>
                             }
                             {pathName.id && 
-                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-white hover:bg-gray-200 hover:shadow-md  ' key={e.LotId}>
-                                    <Lotdetails lotDetail={e} /> 
+                                <li className='h-[7.5vh] min-h-[7.5vh] w-full rounded-xl bg-gray-100 hover:bg-gray-200 hover:border-2 border-solid hover:border-gray-200' key={e.LotId}>
+                                    <Lotdetails lotDetail={e} isLoading={isLoading}/> 
                                 </li>  
                             }                   
                         </>

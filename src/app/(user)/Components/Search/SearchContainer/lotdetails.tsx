@@ -1,10 +1,11 @@
 import React from 'react';
-import { lotDetails } from '../../interface/lotDetail';
-import { lotSubDetails } from '../../interface/lotSubDetails';
+import { lotDetails } from '../../navMenu/interface/lotDetail';
+import { lotSubDetails } from '../../navMenu/interface/lotSubDetails';
 import { useParams } from 'next/navigation';
 
 type Props = {
   lotDetail: lotDetails | lotSubDetails;
+  isLoading :boolean ; 
 };
 
 export default function Lotdetails({ lotDetail }: Props) {
@@ -52,12 +53,12 @@ export default function Lotdetails({ lotDetail }: Props) {
         return (
           <p
             key={key}
-            className={`flex w-full justify-center 
+            className={`flex w-full justify-center text-gray-500 
               ${ keys.length === 2 ? 'text-xl' : 'text-md'}
             `}
-            >
-              {`${result}`}
-            </p>
+          >
+            {`${result}`}
+          </p>
           );          
       })}
     </div>

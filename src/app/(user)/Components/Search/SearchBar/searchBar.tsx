@@ -19,7 +19,7 @@ export default function SearchBar({onFetching}: Props) {
   return (
     <div className='w-[40vw] '>
       <form
-        className='flex flex-row w-full bg-gray-200 bg-opacity-90 items-center justify-start px-[2vw]  outline-slate-100 rounded-2xl shadow-sm outline-1'
+        className='flex flex-row w-full bg-gray-200 opacity-80 items-center justify-start px-[2vw]  rounded-2xl shadow-sm '  
         onSubmit={onSubmitHandler}
       >
         <input

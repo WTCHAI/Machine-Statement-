@@ -1,6 +1,6 @@
 import React from 'react';
-import { lotDetails } from '../../interface/lotDetail';
-import { lotSubDetails } from '../../interface/lotSubDetails';
+import { lotDetails } from '../../navMenu/interface/lotDetail';
+import { lotSubDetails } from '../../navMenu/interface/lotSubDetails';
 import { useParams } from 'next/navigation';
 
 type DataType = lotDetails | lotSubDetails;
@@ -68,13 +68,13 @@ export default function HeadDetails({ data }: Props) {
       { !pathName.id && 
       <>
         <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
-          <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
-            <p className=' w-full text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-slate-400'>Lot Id</p>
+          <div className='flex w-full tracking-tighter leading-tight text-gray-600 text-md font-medium'>
+            <p className=' text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-gray-500'>Lot Id</p>
           </div> 
         </li>
         <li className={`flex flex-row w-full h-full items-center bg-transparent `}>
-          <div className='flex w-full tracking-tighter leading-tight text-slate-500 text-md font-medium'>
-            <p className=' w-full text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-slate-400'>Date</p>
+          <div className='flex w-full tracking-tighter leading-tight text-gray-600 text-md font-medium'>
+            <p className='  text-xl font-medium pl-[3vw] pt-[2vh] cursor-default hover:text-gray-500'>Date</p>
           </div> 
         </li>    
       </>

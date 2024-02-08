@@ -10,15 +10,14 @@ type Props = {
 
 export default function SearchHeader({onFetcing , onFilterDate }: Props) {
   return (
-    <header className='w-full flex flex-row justify-between items-center px-[2vw] bg-gray-50 py-[0.5vh]'>
+    <header className='w-full flex flex-row justify-between items-center px-[2vw] pt-[1vh] '>
         <div>
             <SearchBar onFetching={onFetcing}/>
         </div>
-        <div className='flex flex-row gap-x-[1vw]'>
+        <div className='flex flex-row  w-[12vw] gap-x-[1vw]'>
             <Calendar onFilterDate={onFilterDate}/>                    
             <ExportBtn/>            
         </div>
-
     </header>
     )
 }

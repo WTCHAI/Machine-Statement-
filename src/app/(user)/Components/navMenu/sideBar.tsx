@@ -46,7 +46,7 @@ export default function NavigationMenu({}: Props) {
     <ul className='flex flex-col h-full w-full gap-y-[2vh] mt-[2vh] text-slate-700'>
       <Link href="/dashboard">
         <li
-          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.dashboard ? ' bg-gray-200 shadow-md ': ''}`}
+          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.dashboard ? ' bg-gray-200 opacity-85 shadow-md ': ''}`}
           onClick={()=>{
             onClickHandler('dashboard')
           }}  
@@ -57,7 +57,7 @@ export default function NavigationMenu({}: Props) {
       </Link>
       <Link href="/search">
         <li
-          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.search ? ' bg-gray-200 shadow-md ': ''}`}
+          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.search ? ' bg-gray-200 opacity-85  shadow-md ': ''}`}
           onClick={()=>{
             onClickHandler('search')
           }}    
@@ -69,7 +69,7 @@ export default function NavigationMenu({}: Props) {
 
       <Link href="/setting">
         <li
-          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.setting ? ' bg-gray-200 shadow-md ': ''}`}
+          className={`flex items-center mx-[2vw] py-[2vh] px-[2vw] gap-x-[2vw] rounded-xl hover:bg-gray-100 hover:shadow-lg cursor-pointer ${activeState.setting ? ' bg-gray-200 opacity-85  shadow-md ': ''}`}
           onClick={()=>{
             onClickHandler('setting')
           }}  
